@@ -1,7 +1,7 @@
 ![logo_w-1](https://user-images.githubusercontent.com/67556491/193203493-632c4b7a-b06b-4e8f-b306-dec380bb4b5b.png)
 
 
-## 정육쩜 **프로젝트 Front-end/Back-end 소개**
+## 정육쩜 **프로젝트 소개**
 
 - 초신선 육류를 주력으로 판매하는 쇼핑몰
 - 프로젝트 기간동안 메인, 회원가입, 로그인, 리스트, 상세, 장바구니 결제 페이지를 구현했습니다.
