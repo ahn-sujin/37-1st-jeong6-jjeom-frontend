@@ -18,7 +18,6 @@ const NotifyBanner = () => {
   if (move2 === -1150) {
     return setMove(0);
   }
-  console.log(move2);
 
   return (
     <div>

@@ -28,13 +28,11 @@ const Payment = () => {
     return checkedProducts.slice(0, -1);
   };
 
-  console.log(checkedQueryString());
-
   const saveInputValue = e => {
     const { name, value } = e.target;
     setInputValue({ ...inputValue, [name]: value });
   };
-  // Todo : cartId=1& 장바구니에서 쿼리스트링 형식으로 받아와야함
+
   useEffect(() => {
     fetch(`${API.ORDER}/information?${checkedQueryString()}`, {
       method: 'GET',
@@ -50,10 +48,11 @@ const Payment = () => {
   const getQuan = cartItem.map(item => {
     return item.quantity;
   });
-  // console.log(getQuan.toString());
+
   const getProductId = cartItem.map(item => {
     return item.id;
   });
+
   const handleStep = step => {
     if (step === 'completion') {
       fetch(`${API.ORDER}/makeOrder`, {

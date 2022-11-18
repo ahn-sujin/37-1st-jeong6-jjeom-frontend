@@ -2,16 +2,7 @@ import React from 'react';
 import './Info.scss';
 
 const Info = ({ description }) => {
-  const {
-    name,
-    price,
-    standard_unit,
-    description_url,
-    weight,
-    birth,
-    expiration,
-    storage,
-  } = description;
+  const { name, weight, birth, expiration, storage } = description;
   return (
     <div className="info">
       <section className="info_basic">

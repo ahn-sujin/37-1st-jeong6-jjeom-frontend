@@ -19,36 +19,6 @@ const Confirm = ({ inputValue, handleStep, saveInputValue }) => {
             />
             무통장 입금
           </label>
-          {/* <label className="confirm_radio">
-            <input
-              className="radio_btn"
-              type="radio"
-              value="네이버 페이"
-              name="paymentMethod"
-              onChange={saveInputValue}
-            />
-            네이버 페이
-          </label>
-          <label className="confirm_radio">
-            <input
-              className="radio_btn"
-              type="radio"
-              value="카카오 입금"
-              name="paymentMethod"
-              onChange={saveInputValue}
-            />
-            카카오 입금
-          </label>
-          <label className="confirm_radio">
-            <input
-              className="radio_btn"
-              type="radio"
-              value="신용카드"
-              name="paymentMethod"
-              onChange={saveInputValue}
-            />
-            신용카드
-          </label> */}
         </form>
       </section>
 

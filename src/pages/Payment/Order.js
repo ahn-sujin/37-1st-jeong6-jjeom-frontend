@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import StepBtn from './StepBtn';
 import './Order.scss';
 
 const Order = ({ inputValue, handleStep, saveInputValue, cartItem }) => {
-  const [userData, setUserData] = useState({});
   const currentYear = new Date().getFullYear();
   const currentMonth = new Date().getMonth() + 1;
   const currentDate = new Date().getDate();
-  console.log(cartItem);
   const currentDay =
     currentYear +
     '-' +
