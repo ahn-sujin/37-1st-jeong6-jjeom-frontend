@@ -14,8 +14,7 @@
   width: 1168px;
 
   .best_header {
-    @include flex-center;
-    justify-content: space-between;
+    display: flex;
 
     .fa-solid {
       cursor: pointer;

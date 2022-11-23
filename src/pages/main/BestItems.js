@@ -91,13 +91,15 @@ const BestItems = () => {
   }, []);
   return (
     <div className="bestItems">
-      <div className="best_header">
-        <span className="best_title">
-          {tabContArr.map((section, index) => {
-            return section.tabTitle;
-          })}
-        </span>
-      </div>
+      <ul className="best_header">
+        {tabContArr.map((section, index) => {
+          return (
+            <li className="best_title" key={index}>
+              {section.tabTitle}
+            </li>
+          );
+        })}
+      </ul>
 
       <ul className="products_list">{tabContArr[activeIndex].tabCont}</ul>
     </div>
