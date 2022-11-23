@@ -27,16 +27,16 @@
 
 ### **적용 기술**
 
-> Front-End : React.js, sass
+> Front-End : `React.js`, `sass`
 
-> Back-End : My SQL, Bcrypt, Node.js 
+> Back-End : `My SQL`, `Bcrypt`, `Node.js` 
 
-> Common :  RESTful API
+> Common :  `RESTful API`, `Git`, `GitHub`
 
 
 ### **내가 구현한 기능**
 
-### 1) header
+### 1) header [👉🏻 자세히 보기](https://github.com/ahn-sujin/37-1st-jeong6-jjeom-frontend/tree/master/src/components/Header)
 ![image](https://user-images.githubusercontent.com/67556491/193551784-9fc59d4a-7f43-4edd-ad0e-3f259f179954.gif)
 
 - 페이지별 공통 컴포넌트인 **header레이아웃**을 잡았습니다.
@@ -44,13 +44,14 @@
 - **사용자가 로그인**했을 때, localstorage에 저장된 token을 가져와서 header **로그인/회원가입** 메뉴를 **로그아웃/마이페이지** 로 바뀌도록 구현했습니다.
 
 
-### 2) footer
+
+### 2) footer [👉🏻 자세히 보기](https://github.com/ahn-sujin/37-1st-jeong6-jjeom-frontend/tree/master/src/components/Footer)
 ![image](https://user-images.githubusercontent.com/67556491/193551250-79229c45-b088-4844-aeeb-492d090e33a4.png)
 
 - 페이지별 공통 컴포넌트인 **footer레이아웃**을 잡았습니다.
 
 
-### 3) 장바구니 
+### 3) 장바구니 [👉🏻 자세히 보기](https://github.com/ahn-sujin/37-1st-jeong6-jjeom-frontend/tree/master/src/pages/Cart)
 
 #### 3-1) 체크박스 구현
 
