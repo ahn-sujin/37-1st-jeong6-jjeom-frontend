@@ -1,6 +1,7 @@
 import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Nav from './components/Nav';
+import { TOKEN } from '../../config';
 import './Header.scss';
 
 const Header = () => {
@@ -97,6 +98,5 @@ const Header = () => {
 
 export default Header;
 
-const TOKEN = localStorage.getItem('token');
 const MEMBER_MENU = ['로그아웃', '마이페이지'];
 const NON_MEMBER_MENU = ['로그인', '회원가입'];
