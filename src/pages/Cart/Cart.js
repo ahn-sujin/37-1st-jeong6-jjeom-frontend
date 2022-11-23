@@ -2,25 +2,22 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import CartItemList from './components/CartItemList';
 import ItemNone from './components/ItemNone';
+import { API, TOKEN } from '../../config';
 import './Cart.scss';
-import { API } from '../../config';
 
 const DELIVERY_FEE = 3500;
 
 const Cart = () => {
-  const [cartItem, setCartItem] = useState([]);
-  const [checkedItem, setCheckedItem] = useState([]);
+  const [cartItem, setCartItem] = useState([]); //장바구니에 담긴 상품 정보
+  const [checkedItem, setCheckedItem] = useState([]); //선택된 상품의 id
 
   const navigate = useNavigate();
 
-  const postOrder = () => {
-    navigate('/payment', { state: { cartId: checkedItem } });
-  };
-
   const isAllChecked =
-    checkedItem.length !== 0 && cartItem.length === checkedItem.length;
+    checkedItem.length !== 0 && cartItem.length === checkedItem.length; // 모두 선택된 조건
 
   const totalPrice = cartItem.reduce(
+    //선택된 상품들의 합계
     (acc, cart) =>
       checkedItem.indexOf(cart.id) !== -1
         ? acc + Number(cart.price) * cart.quantity
@@ -28,9 +25,10 @@ const Cart = () => {
     0
   );
 
-  const sumAllPrice = checkedItem.length === 0 ? 0 : totalPrice + DELIVERY_FEE;
+  const sumAllPrice = checkedItem.length === 0 ? 0 : totalPrice + DELIVERY_FEE; // 총 결제 금액 (선택 상품 합계 + 배송비)
 
   const handleSingleCheck = id => {
+    //개별 체크
     if (checkedItem.includes(id)) {
       setCheckedItem(checkedItem.filter(el => el !== id));
     } else {
@@ -39,6 +37,7 @@ const Cart = () => {
   };
 
   const handleAllCheck = () => {
+    //모두 체크
     if (isAllChecked) {
       setCheckedItem([]);
     } else {
@@ -47,6 +46,7 @@ const Cart = () => {
   };
 
   const onChangeProps = (id, key, value) => {
+    //수량 조절
     setCartItem(prevItem => {
       return prevItem.map(obj => {
         if (obj.option_products_id === id) {
@@ -58,13 +58,19 @@ const Cart = () => {
     });
   };
 
+  const postOrder = () => {
+    // 선택된 상품의 id를 주문 페이지로 이동하면서 state로 전달
+    navigate('/payment', { state: { cartId: checkedItem } });
+  };
+
   const patchAmount = async (optionProductsId, quantity) => {
+    // 수량 수정 통신(PATCH)
     const response = await fetch(
       `${API.CART}/patch?optionProductsId=${optionProductsId}&quantity=${quantity}`,
       {
         method: 'PATCH',
         headers: {
-          Authorization: localStorage.getItem('token'),
+          Authorization: TOKEN,
         },
       }
     );
@@ -73,7 +79,7 @@ const Cart = () => {
     if (data) {
       const response = await fetch(`${API.CART}/user`, {
         headers: {
-          Authorization: localStorage.getItem('token'),
+          Authorization: TOKEN,
         },
       });
 
@@ -107,13 +113,15 @@ const Cart = () => {
   };
 
   const deleteProduct = async () => {
+    // 선택 상품 삭제 통신(DELETE)
     const response = await fetch(
       `${API.CART}/delete?cartsId=${checkedItem.join('&cartsId=')}`,
+      //`http://localhost:4000/getCartbyId/${checkedItem.join('')}`,
       {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json;charset=utf-8',
-          Authorization: localStorage.getItem('token'),
+          Authorization: TOKEN,
         },
       }
     );
@@ -121,14 +129,15 @@ const Cart = () => {
     const data = await response.json();
 
     if (data) {
-      const response = await fetch(`${API.CART}/user`, {
+      const response = await fetch(`http://localhost:4000/getCartbyId`, {
+        //`${API.CART}/user`
         headers: {
-          Authorization: localStorage.getItem('token'),
+          Authorization: TOKEN,
         },
       });
 
       const data = await response.json();
-      const filteredList = data.getCartbyId
+      const filteredList = data
         .filter(el => {
           return !checkedItem.includes(el.id);
         })
@@ -148,15 +157,21 @@ const Cart = () => {
     }
   };
 
-  const getCartData = () => {
-    fetch(`${API.CART}/user`, {
+  const getCartData = async () => {
+    // 상품 불러오기 통신(GET)
+    const response = await fetch(`${API.CART}/user`, {
+      //'http://localhost:4000/getCartbyId'
       headers: {
         'Content-Type': 'application/json;charset=utf-8',
-        Authorization: localStorage.getItem('token'),
+        Authorization: TOKEN,
       },
-    })
-      .then(res => res.json())
-      .then(data => setCartItem(data.getCartbyId));
+    });
+
+    const data = await response.json();
+
+    if (data) {
+      setCartItem(data);
+    }
   };
 
   useEffect(() => {
@@ -195,8 +210,6 @@ const Cart = () => {
                     onChangeProps={onChangeProps}
                     checkedItem={checkedItem}
                     handleSingleCheck={() => handleSingleCheck(data.id)}
-                    deleteProduct={deleteProduct}
-                    setCartItem={setCartItem}
                     patchAmount={patchAmount}
                   />
                 ))}
